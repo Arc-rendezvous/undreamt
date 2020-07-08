@@ -386,7 +386,8 @@ class Validator:
         for i in range(0, self.sentence_count, self.batch_size):
             j = min(i + self.batch_size, self.sentence_count)
             loss += self.translator.score(self.sorted_source[i:j], self.sorted_reference[i:j], train=False).data
-        return np.exp(loss/self.reference_word_count)
+        return torch.exp(loss/self.reference_word_count)
+        # return np.exp(loss/self.reference_word_count)
 
     def translate(self):
         translations = []
